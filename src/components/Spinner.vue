@@ -1,7 +1,7 @@
 <template>
   <lottie
-    :width="1024"
-    :height="1024"
+    :width="50"
+    :height="50"
     :options="lottieOptions"
     v-on:animCreated="handleAnimation"/>
 </template>

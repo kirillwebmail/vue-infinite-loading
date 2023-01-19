@@ -133,7 +133,7 @@ export const STATUS = {
 export const SLOT_STYLES = {
   color: '#666',
   fontSize: '14px',
-  padding: '10px 0',
+  padding: '40px 0 0 0',
 };
 
 export default {
