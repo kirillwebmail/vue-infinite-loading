@@ -1,64 +1,26 @@
 <template>
-  <component :is="spinnerView"></component>
+  <lottie
+    :width="1024"
+    :height="1024"
+    :options="lottieOptions"
+    v-on:animCreated="handleAnimation"/>
 </template>
 
 <script>
+import lottie from 'vue-lottie/src/lottie.vue';
 import config from '../config';
+import * as animationData from '../lottie/LoadingLoopL.json';
 
 const SPINNERS = {
-  BUBBLES: {
+  LOTTIE: {
     render(createElement) {
       return createElement('span', {
         attrs: {
-          class: 'loading-bubbles',
+          class: 'loading-lottie',
         },
       }, Array.apply(Array, Array(8)).map(() => createElement('span', {
         attrs: {
-          class: 'bubble-item',
-        },
-      })));
-    },
-  },
-  CIRCLES: {
-    render(createElement) {
-      return createElement('span', {
-        attrs: {
-          class: 'loading-circles',
-        },
-      }, Array.apply(Array, Array(8)).map(() => createElement('span', {
-        attrs: {
-          class: 'circle-item',
-        },
-      })));
-    },
-  },
-  DEFAULT: {
-    render(createElement) {
-      return createElement('i', {
-        attrs: {
-          class: 'loading-default',
-        },
-      });
-    },
-  },
-  SPIRAL: {
-    render(createElement) {
-      return createElement('i', {
-        attrs: {
-          class: 'loading-spiral',
-        },
-      });
-    },
-  },
-  WAVEDOTS: {
-    render(createElement) {
-      return createElement('span', {
-        attrs: {
-          class: 'loading-wave-dots',
-        },
-      }, Array.apply(Array, Array(5)).map(() => createElement('span', {
-        attrs: {
-          class: 'wave-item',
+          class: 'lottie-item',
         },
       })));
     },
@@ -67,6 +29,9 @@ const SPINNERS = {
 
 export default {
   name: 'Spinner',
+  components: {
+    lottie,
+  },
   computed: {
     spinnerView() {
       return (
@@ -90,10 +55,21 @@ export default {
       } else {
         // fallback to spinner property config
         /* istanbul ignore next */
-        result = SPINNERS[config.props.spinner.toUpperCase()] || SPINNERS.DEFAULT;
+        result = SPINNERS.LOTTIE;
       }
 
       return result;
+    },
+  },
+  data() {
+    return {
+      anim: null, // for saving the reference to the animation
+      lottieOptions: { animationData: animationData.default },
+    };
+  },
+  methods: {
+    handleAnimation(anim) {
+      this.anim = anim;
     },
   },
 };

@@ -123,5 +123,8 @@
     "dist",
     "test/unit/coverage",
     "scripts"
-  ]
+  ],
+  "dependencies": {
+    "vue-lottie": "^0.2.1"
+  }
 }
